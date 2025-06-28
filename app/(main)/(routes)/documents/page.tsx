@@ -27,7 +27,7 @@ const DocumentsPage = () => {
       <div className="h-full flex flex-col items-center justify-center space-y-4">
         <Image src="/empty.svg" height="300" width="300" alt="Empty" />
         <h2 className="text-lg font-medium">
-          Welcome to {user?.firstName}&apas;s Notion{" "}
+          Welcome to {user?.firstName}&apos;s Notion{" "}
         </h2>
         <Button onClick={onCreate}>
           <PlusCircle className="h-4 w-4 mr-2" />
