@@ -152,7 +152,7 @@ export const Item = ({
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <div className="text-sm text-muted-foreground p-2">
-                  Last edit by: {user?.fullName}
+                  Last edited by: {user?.fullName}
                 </div>
               </DropdownMenuContent>
             </DropdownMenu>
