@@ -11,6 +11,8 @@
   "dependencies": {
     "@clerk/clerk-react": "^5.32.1",
     "@clerk/nextjs": "^6.23.0",
+    "@edgestore/react": "^0.5.2",
+    "@edgestore/server": "^0.5.2",
     "@radix-ui/react-alert-dialog": "^1.1.14",
     "@radix-ui/react-avatar": "^1.1.10",
     "@radix-ui/react-dialog": "^1.1.14",
@@ -28,10 +30,12 @@
     "next-themes": "^0.4.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-dropzone": "^14.3.8",
     "react-textarea-autosize": "^8.5.9",
     "sonner": "^2.0.5",
     "tailwind-merge": "^3.3.1",
     "usehooks-ts": "^3.1.1",
+    "zod": "^3.25.67",
     "zustand": "^5.0.6"
   },
   "devDependencies": {
