@@ -7,13 +7,17 @@ import { PlusCircle } from "lucide-react";
 import Image from "next/image";
 import { api } from "@/convex/_generated/api";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const DocumentsPage = () => {
   const { user } = useUser();
   const create = useMutation(api.documents.create);
+  const router = useRouter();
 
   const onCreate = () => {
-    const promise = create({ title: "Untitled" });
+    const promise = create({ title: "Untitled" }).then((documentId) => {
+      router.push(`/documents/${documentId}`);
+    });
 
     toast.promise(promise, {
       loading: "Creating a new note...",
@@ -25,7 +29,7 @@ const DocumentsPage = () => {
   return (
     <>
       <div className="h-full flex flex-col items-center justify-center space-y-4">
-        <Image src="/empty.svg" height="300" width="300" alt="Empty" />
+        <Image src="/empty.svg" height="300" width="300" alt="Empty" priority />
         <h2 className="text-lg font-medium">
           Welcome to {user?.firstName}&apos;s Notion{" "}
         </h2>

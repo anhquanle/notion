@@ -39,6 +39,8 @@ export const TrashBox = () => {
       success: "Note restored!",
       error: "Failed to restore note.",
     });
+
+    onClick(documentId);
   };
 
   const onRemove = (documentId: Id<"documents">) => {
