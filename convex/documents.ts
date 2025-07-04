@@ -2,9 +2,6 @@ import { v } from "convex/values";
 
 import { mutation, query } from "./_generated/server";
 import { Doc, Id } from "./_generated/dataModel";
-import { use } from "react";
-import { execSync } from "child_process";
-import { existsSync } from "fs";
 
 export const archive = mutation({
   args: { id: v.id("documents") },
