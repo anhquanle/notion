@@ -1,12 +1,12 @@
 "use client";
 
 import { Spinner } from "@/components/spinner";
-import { useConvexAuth } from "convex/react";
-import { Divide } from "lucide-react";
-import { redirect } from "next/navigation";
-import React from "react";
-import { Navigation } from "./_components/navigation";
 import { SearchCommand } from "@/components/search-command";
+
+import React from "react";
+import { redirect } from "next/navigation";
+import { Navigation } from "@/app/(main)/_components/navigation";
+import { useConvexAuth } from "convex/react";
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated, isLoading } = useConvexAuth();

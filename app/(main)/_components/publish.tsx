@@ -1,16 +1,18 @@
+import { api } from "@/convex/_generated/api";
 import { Doc } from "@/convex/_generated/dataModel";
+
+import { toast } from "sonner";
+import { useState } from "react";
+import { useOrigin } from "@/hooks/use-origin";
+import { useMutation } from "convex/react";
+import { Check, Copy, Globe } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
 import {
   Popover,
   PopoverTrigger,
   PopoverContent,
 } from "@/components/ui/popover";
-import { useOrigin } from "@/hooks/use-origin";
-import { useMutation } from "convex/react";
-import { api } from "@/convex/_generated/api";
-import { useState } from "react";
-import { toast } from "sonner";
-import { Button } from "@/components/ui/button";
-import { Check, Copy, Globe } from "lucide-react";
 
 interface PublishProps {
   initialData: Doc<"documents">;
@@ -29,7 +31,7 @@ const Publish = ({ initialData }: PublishProps) => {
     setIsSubmitting(true);
 
     const promise = update({ id: initialData._id, isPublished: true }).finally(
-      () => setIsSubmitting(false)
+      () => setIsSubmitting(false),
     );
 
     toast.promise(promise, {
@@ -43,7 +45,7 @@ const Publish = ({ initialData }: PublishProps) => {
     setIsSubmitting(true);
 
     const promise = update({ id: initialData._id, isPublished: false }).finally(
-      () => setIsSubmitting(false)
+      () => setIsSubmitting(false),
     );
 
     toast.promise(promise, {

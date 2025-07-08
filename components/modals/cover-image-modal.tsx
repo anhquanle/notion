@@ -1,20 +1,21 @@
 "use client";
 
+import { Id } from "@/convex/_generated/dataModel";
+import { api } from "@/convex/_generated/api";
+
 import * as React from "react";
 import { useMutation } from "convex/react";
 import { useCoverImage } from "@/hooks/use-cover-image";
 
-import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
 import { SingleImageDropzone } from "@/components/upload/single-image";
+import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
 import {
   UploaderProvider,
   type UploadFn,
 } from "@/components/upload/uploader-provider";
 
-import { useEdgeStore } from "@/lib/edgestore";
-import { api } from "@/convex/_generated/api";
 import { useParams } from "next/navigation";
-import { Id } from "@/convex/_generated/dataModel";
+import { useEdgeStore } from "@/lib/edgestore";
 
 export const CoverImageModal = () => {
   const update = useMutation(api.documents.update);
@@ -48,7 +49,7 @@ export const CoverImageModal = () => {
 
       return res;
     },
-    [edgestore, update, params.documentId, coverImage]
+    [edgestore, update, params.documentId, coverImage],
   );
 
   return (

@@ -1,10 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { api } from "@/convex/_generated/api";
 import { File } from "lucide-react";
+import { useUser } from "@clerk/clerk-react";
 import { useQuery } from "convex/react";
 import { useRouter } from "next/navigation";
-import { useUser } from "@clerk/clerk-react";
+import { useSearch } from "@/hooks/use-search";
+import { useEffect, useState } from "react";
 
 import {
   CommandDialog,
@@ -14,9 +16,6 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
-
-import { api } from "@/convex/_generated/api";
-import { useSearch } from "@/hooks/use-search";
 
 // server/client side rendering
 

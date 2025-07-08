@@ -1,22 +1,27 @@
 "use client";
 
-import { ConfirmModal } from "@/components/modals/confirm-modal";
-import { Spinner } from "@/components/spinner";
-import { Input } from "@/components/ui/input";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
-import { useMutation, useQuery } from "convex/react";
+
+import { Input } from "@/components/ui/input";
+import { Spinner } from "@/components/spinner";
+import { ConfirmModal } from "@/components/modals/confirm-modal";
+
+import { toast } from "sonner";
+import { useState } from "react";
+import { useEdgeStore } from "@/lib/edgestore";
 import { Search, Trash, Undo } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
-import { useState } from "react";
-import { toast } from "sonner";
+import { useMutation, useQuery } from "convex/react";
 
 export const TrashBox = () => {
   const router = useRouter();
   const params = useParams();
+  const { edgestore } = useEdgeStore();
   const documents = useQuery(api.documents.getTrash);
   const restore = useMutation(api.documents.restore);
   const remove = useMutation(api.documents.remove);
+  const removeCoverImage = useMutation(api.documents.removeCoverImage);
 
   const [search, setSearch] = useState("");
   const filteredDocuments = documents?.filter((document) => {
@@ -29,7 +34,7 @@ export const TrashBox = () => {
 
   const onRestore = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    documentId: Id<"documents">
+    documentId: Id<"documents">,
   ) => {
     event.stopPropagation();
     const promise = restore({ id: documentId });
@@ -43,7 +48,7 @@ export const TrashBox = () => {
     onClick(documentId);
   };
 
-  const onRemove = (documentId: Id<"documents">) => {
+  const onRemove = async (documentId: Id<"documents">) => {
     const promise = remove({ id: documentId });
 
     toast.promise(promise, {
@@ -65,6 +70,16 @@ export const TrashBox = () => {
         </>
       );
     }
+  };
+
+  const onRemoveImage = async (url: string) => {
+    if (url) {
+      await edgestore.publicFiles.delete({
+        url: url,
+      });
+    }
+
+    removeCoverImage({ id: params.documentId as Id<"documents"> });
   };
 
   return (
@@ -100,7 +115,12 @@ export const TrashBox = () => {
                   >
                     <Undo className="h-4 w-4 text-muted-foreground" />
                   </div>
-                  <ConfirmModal onConfirm={() => onRemove(document._id)}>
+                  <ConfirmModal
+                    onConfirm={() => {
+                      onRemove(document._id);
+                      onRemoveImage(document.coverImage ?? "");
+                    }}
+                  >
                     <div
                       role="button"
                       className="rounded-sm p-2 hover:bg-neutral-300 dark:hover:bg-neutral-600"

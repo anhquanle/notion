@@ -1,25 +1,31 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
-import { useMutation } from "convex/react";
-import { DocumentProps } from "next/document";
-import { useRouter } from "next/navigation";
-import { toast } from "sonner";
+
+import { Button } from "@/components/ui/button";
 import { ConfirmModal } from "@/components/modals/confirm-modal";
+
+import { toast } from "sonner";
+import { useMutation } from "convex/react";
+import { useEdgeStore } from "@/lib/edgestore";
+import { useParams, useRouter } from "next/navigation";
 
 interface BannerProps {
   documentId: Id<"documents">;
+  url?: string;
 }
 
-export const Banner = ({ documentId }: BannerProps) => {
+export const Banner = ({ documentId, url }: BannerProps) => {
   const router = useRouter();
+  const { edgestore } = useEdgeStore();
+  const params = useParams();
 
   const remove = useMutation(api.documents.remove);
   const restore = useMutation(api.documents.restore);
+  const removeCoverImage = useMutation(api.documents.removeCoverImage);
 
-  const onRemove = () => {
+  const onRemove = async () => {
     const promise = remove({ id: documentId });
 
     toast.promise(promise, {
@@ -27,6 +33,14 @@ export const Banner = ({ documentId }: BannerProps) => {
       success: "Note deleted!",
       error: "Failed to delete note.",
     });
+
+    if (url) {
+      await edgestore.publicFiles.delete({
+        url: url,
+      });
+    }
+
+    removeCoverImage({ id: params.documentId as Id<"documents"> });
 
     router.push("/documents");
   };

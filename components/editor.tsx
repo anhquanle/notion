@@ -7,6 +7,7 @@ import { BlockNoteView } from "@blocknote/mantine";
 import { useEffect } from "react";
 import { useDebounceCallback } from "usehooks-ts";
 import { useEdgeStore } from "@/lib/edgestore";
+import { BlockNoteEditor } from "@blocknote/core";
 
 interface EditorProps {
   initialContent?: string;
@@ -28,7 +29,9 @@ export default function Editor({
     return res.url;
   };
 
-  const editor = useCreateBlockNote({ uploadFile: handleUploadFile });
+  const editor: BlockNoteEditor = useCreateBlockNote({
+    uploadFile: handleUploadFile,
+  });
 
   // Parse initial content to BlockNote editor view
   useEffect(() => {

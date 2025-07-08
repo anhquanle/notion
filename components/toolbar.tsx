@@ -1,12 +1,14 @@
 "use client";
 
-import { IconPicker } from "@/components/icon-picker";
-import { Button } from "@/components/ui/button";
 import { api } from "@/convex/_generated/api";
 import { Doc } from "@/convex/_generated/dataModel";
-import { useCoverImage } from "@/hooks/use-cover-image";
+
+import { Button } from "@/components/ui/button";
+import { IconPicker } from "@/components/icon-picker";
+
 import { useMutation } from "convex/react";
 import { ImageIcon, Smile, X } from "lucide-react";
+import { useCoverImage } from "@/hooks/use-cover-image";
 import { ComponentRef, useRef, useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 

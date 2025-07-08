@@ -1,7 +1,6 @@
 import { v } from "convex/values";
-
-import { mutation, query } from "./_generated/server";
 import { Doc, Id } from "./_generated/dataModel";
+import { mutation, query } from "./_generated/server";
 
 export const archive = mutation({
   args: { id: v.id("documents") },
@@ -24,7 +23,7 @@ export const archive = mutation({
       const children = await ctx.db
         .query("documents")
         .withIndex("by_user_parent", (q) =>
-          q.eq("userId", userId).eq("parentDocument", documentId)
+          q.eq("userId", userId).eq("parentDocument", documentId),
         )
         .collect();
 
@@ -59,7 +58,7 @@ export const getSidebar = query({
     const documents = await ctx.db
       .query("documents")
       .withIndex("by_user_parent", (q) =>
-        q.eq("userId", userId).eq("parentDocument", args.parentDocument)
+        q.eq("userId", userId).eq("parentDocument", args.parentDocument),
       )
       .filter((q) => q.eq(q.field("isArchived"), false))
       .order("desc")
@@ -148,7 +147,7 @@ export const restore = mutation({
       const children = await ctx.db
         .query("documents")
         .withIndex("by_user_parent", (q) =>
-          q.eq("userId", userId).eq("parentDocument", documentId)
+          q.eq("userId", userId).eq("parentDocument", documentId),
         )
         .collect();
 

@@ -2,16 +2,17 @@
 
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import { string } from "zod";
-import { Button } from "./ui/button";
-import { ImageIcon, X } from "lucide-react";
-import { useCoverImage } from "@/hooks/use-cover-image";
-import { useMutation } from "convex/react";
-import { api } from "@/convex/_generated/api";
 import { useParams } from "next/navigation";
-import { Id } from "@/convex/_generated/dataModel";
+import { useMutation } from "convex/react";
+import { ImageIcon, X } from "lucide-react";
 import { useEdgeStore } from "@/lib/edgestore";
-import { Skeleton } from "./ui/skeleton";
+import { useCoverImage } from "@/hooks/use-cover-image";
+
+import { api } from "@/convex/_generated/api";
+import { Id } from "@/convex/_generated/dataModel";
+
+import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface CoverImageProps {
   url?: string;
@@ -40,7 +41,7 @@ export const Cover = ({ url, preview }: CoverImageProps) => {
         className={cn(
           "relative w-full h-[35vh] group",
           !url && "h-[12vh]",
-          url && "bg-muted"
+          url && "bg-muted",
         )}
       >
         {!!url && (

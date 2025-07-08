@@ -1,5 +1,10 @@
 "use client";
 
+import { cn } from "@/lib/utils";
+import { api } from "@/convex/_generated/api";
+import { Id } from "@/convex/_generated/dataModel";
+import { Skeleton } from "@/components/ui/skeleton";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,12 +12,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Skeleton } from "@/components/ui/skeleton";
-import { api } from "@/convex/_generated/api";
-import { Id } from "@/convex/_generated/dataModel";
-import { cn } from "@/lib/utils";
-import { useUser } from "@clerk/clerk-react";
-import { useMutation } from "convex/react";
 import {
   ChevronDown,
   ChevronRight,
@@ -21,8 +20,11 @@ import {
   Plus,
   Trash,
 } from "lucide-react";
-import { useRouter } from "next/navigation";
+
 import { toast } from "sonner";
+import { useMutation } from "convex/react";
+import { useRouter } from "next/navigation";
+import { useUser } from "@clerk/clerk-react";
 
 interface ItemProps {
   id?: Id<"documents">;
@@ -71,7 +73,7 @@ export const Item = ({
   };
 
   const handleExpand = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ) => {
     event.stopPropagation();
     onExpand?.();
@@ -89,7 +91,7 @@ export const Item = ({
         }
 
         router.push(`/documents/${documentId}`);
-      }
+      },
     );
 
     toast.promise(promise, {
@@ -109,7 +111,7 @@ export const Item = ({
         style={{ paddingLeft: level ? `${level * 12 + 12}px` : "12px" }}
         className={cn(
           "group min-h-[27px] text-sm py-1 pr-3 w-full hover:bg-primary/5 flex items-center text-muted-foreground font-medium cursor-pointer",
-          active && "bg-primary/5 text-pretty"
+          active && "bg-primary/5 text-pretty",
         )}
       >
         {!!id && (

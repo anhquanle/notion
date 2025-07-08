@@ -1,12 +1,12 @@
-import { Geist, Geist_Mono } from "next/font/google";
 import { Toaster } from "sonner";
 import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
 
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { ModalProvider } from "@/components/providers/modal-provider";
 import { ConvexClientProvider } from "@/components/providers/convex-provider";
 
-import { EdgeStoreProvider } from "../lib/edgestore";
+import { EdgeStoreProvider } from "@/lib/edgestore";
 
 import "./globals.css";
 
