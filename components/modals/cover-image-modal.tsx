@@ -8,12 +8,7 @@ import { useMutation } from "convex/react";
 import { useCoverImage } from "@/hooks/use-cover-image";
 
 import { SingleImageDropzone } from "@/components/upload/single-image";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import {
   UploaderProvider,
   type UploadFn,

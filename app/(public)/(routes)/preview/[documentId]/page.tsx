@@ -7,28 +7,29 @@ import { Cover } from "@/components/cover";
 import { Toolbar } from "@/components/toolbar";
 import { Skeleton } from "@/components/ui/skeleton";
 
-import { useMemo } from "react";
+import React, { useMemo } from "react";
 import dynamic from "next/dynamic";
 import { useMutation, useQuery } from "convex/react";
+import { useParams } from "next/navigation";
 
-interface DocumentIdPageProps {
-  params: {
-    documentId: Id<"documents">;
-  };
-}
+const DocumentIdPage = () => {
+  const params = useParams();
+  const documentId = params?.documentId as Id<"documents">;
 
-const DocumentIdPage = ({ params }: DocumentIdPageProps) => {
   const document = useQuery(api.documents.getById, {
-    documentId: params.documentId,
+    documentId,
   });
 
   const update = useMutation(api.documents.update);
 
-  const Editor = useMemo(() => dynamic(() => import("@/components/editor"), { ssr: false }), []);
+  const Editor = useMemo(
+    () => dynamic(() => import("@/components/editor"), { ssr: false }),
+    []
+  );
 
   const onChange = (newContent: object) => {
     update({
-      id: params.documentId,
+      id: documentId,
       content: newContent,
     });
   };
@@ -58,10 +59,15 @@ const DocumentIdPage = ({ params }: DocumentIdPageProps) => {
   return (
     <>
       <div className="pb-40">
-        <Cover url={document.coverImage} />
+        <Cover url={document.coverImage} preview={true} />
         <div className="md:max-w-4xl lg:max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto">
-          <Toolbar initialData={document} />
-          <Editor key={document._id} onChange={onChange} initialContent={document.content} editable={false} />
+          <Toolbar initialData={document} preview={true} />
+          <Editor
+            key={document._id}
+            onChange={onChange}
+            initialContent={document.content}
+            editable={false}
+          />
         </div>
       </div>
     </>

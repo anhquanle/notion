@@ -16,7 +16,10 @@ const spinnerVariants = cva("text-muted-foreground animate-spin", {
   },
 });
 
-interface SpinnerProps extends VariantProps<typeof spinnerVariants> {}
+interface SpinnerProps extends VariantProps<typeof spinnerVariants> {
+  className?: string;
+  "aria-label"?: string;
+}
 
 export const Spinner = ({ size }: SpinnerProps) => {
   return (
