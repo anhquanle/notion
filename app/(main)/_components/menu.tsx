@@ -43,30 +43,28 @@ export const Menu = ({ documentId }: MenuProps) => {
   };
 
   return (
-    <>
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button size="sm" variant="ghost">
-            <MoreHorizontal className="h-4 w-4" />
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent
-          className="w-60"
-          align="end"
-          alignOffset={8}
-          forceMount
-        >
-          <DropdownMenuItem onClick={onArchive}>
-            <Trash className="h-4 w-4 mr-2" />
-            Delete
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <div className="text-sm text-muted-foreground p-2">
-            Last edited by: {user?.fullName}
-          </div>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    </>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button size="sm" variant="ghost">
+          <MoreHorizontal className="h-4 w-4" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent
+        className="w-60"
+        align="end"
+        alignOffset={8}
+        forceMount
+      >
+        <DropdownMenuItem onClick={onArchive}>
+          <Trash className="h-4 w-4 mr-2" />
+          Delete
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <div className="text-sm text-muted-foreground p-2">
+          Last edited by: {user?.fullName}
+        </div>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };
 

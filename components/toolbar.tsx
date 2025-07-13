@@ -11,6 +11,7 @@ import { ImageIcon, Smile, X } from "lucide-react";
 import { useCoverImage } from "@/hooks/use-cover-image";
 import { ComponentRef, useRef, useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
+import { DivButton } from "./ui/div-button";
 
 interface ToolbarProps {
   initialData: Doc<"documents">;
@@ -93,14 +94,14 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
         <div className="opacity-0 group-hover:opacity-100 flex items-center gap-x-1 py-4">
           {!initialData.icon && !preview && (
             <IconPicker onChange={onIconSelect}>
-              <Button
+              <DivButton
                 className="text-muted-foreground text-xs"
                 variant="outline"
                 size="sm"
               >
                 <Smile className="h-4 w-4 mr-2" />
                 Add icon
-              </Button>
+              </DivButton>
             </IconPicker>
           )}
           {!initialData.coverImage && !preview && (

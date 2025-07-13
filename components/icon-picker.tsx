@@ -31,17 +31,15 @@ export const IconPicker = ({
   const theme = themeMap[currentTheme];
 
   return (
-    <>
-      <Popover>
-        <PopoverTrigger asChild={asChild}>{children}</PopoverTrigger>
-        <PopoverContent className="p-0 w-full border-none shadow-none">
-          <EmojiPicker
-            height={350}
-            theme={theme}
-            onEmojiClick={(data) => onChange(data.emoji)}
-          />
-        </PopoverContent>
-      </Popover>
-    </>
+    <Popover>
+      <PopoverTrigger asChild={asChild}>{children}</PopoverTrigger>
+      <PopoverContent className="p-0 w-full border-none shadow-none">
+        <EmojiPicker
+          height={350}
+          theme={theme}
+          onEmojiClick={(data) => onChange(data.emoji)}
+        />
+      </PopoverContent>
+    </Popover>
   );
 };

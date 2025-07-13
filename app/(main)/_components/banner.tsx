@@ -56,27 +56,25 @@ export const Banner = ({ documentId, url }: BannerProps) => {
   };
 
   return (
-    <>
-      <div className="w-full bg-rose-600 text-center text-sm p-2 text-white flex items-center gap-x-2 justify-center">
-        <p>This page is in the Trash</p>
+    <div className="w-full bg-rose-600 text-center text-sm p-2 text-white flex items-center gap-x-2 justify-center">
+      <p>This page is in the Trash</p>
+      <Button
+        size="sm"
+        onClick={onRestore}
+        variant="outline"
+        className="border-white bg-transparent hover:bg-primary/5 text-white hover:text-white p-1 px-2 h-auto font-normal"
+      >
+        Restore page
+      </Button>
+      <ConfirmModal onConfirm={onRemove}>
         <Button
           size="sm"
-          onClick={onRestore}
           variant="outline"
           className="border-white bg-transparent hover:bg-primary/5 text-white hover:text-white p-1 px-2 h-auto font-normal"
         >
-          Restore page
+          Delete forever
         </Button>
-        <ConfirmModal onConfirm={onRemove}>
-          <Button
-            size="sm"
-            variant="outline"
-            className="border-white bg-transparent hover:bg-primary/5 text-white hover:text-white p-1 px-2 h-auto font-normal"
-          >
-            Delete forever
-          </Button>
-        </ConfirmModal>
-      </div>
-    </>
+      </ConfirmModal>
+    </div>
   );
 };

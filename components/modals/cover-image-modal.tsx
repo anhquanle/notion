@@ -8,7 +8,12 @@ import { useMutation } from "convex/react";
 import { useCoverImage } from "@/hooks/use-cover-image";
 
 import { SingleImageDropzone } from "@/components/upload/single-image";
-import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import {
   UploaderProvider,
   type UploadFn,
@@ -49,15 +54,15 @@ export const CoverImageModal = () => {
 
       return res;
     },
-    [edgestore, update, params.documentId, coverImage],
+    [edgestore, update, params.documentId, coverImage]
   );
 
   return (
     <Dialog open={coverImage.isOpen} onOpenChange={coverImage.onClose}>
       <DialogContent>
-        <DialogHeader>
-          <h2 className="text-center text-lg font-semibold">Cover Image</h2>
-        </DialogHeader>
+        <DialogTitle>
+          <p className="text-center text-lg font-semibold">Cover Image</p>
+        </DialogTitle>
 
         <UploaderProvider uploadFn={uploadFn} autoUpload>
           <SingleImageDropzone
